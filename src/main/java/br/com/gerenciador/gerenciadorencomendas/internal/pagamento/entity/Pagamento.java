@@ -1,8 +1,9 @@
 
-package br.com.gerenciador.gerenciadorencomendas.domain.entity;
+package br.com.gerenciador.gerenciadorencomendas.internal.pagamento.entity;
 
 import br.com.gerenciador.gerenciadorencomendas.domain.enums.FormaPagamento;
 
+import br.com.gerenciador.gerenciadorencomendas.internal.encomenda.entity.Encomenda;
 import jakarta.persistence.*;
 import lombok.Getter;
 

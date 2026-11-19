@@ -1,6 +1,7 @@
 
-package br.com.gerenciador.gerenciadorencomendas.domain.entity;
+package br.com.gerenciador.gerenciadorencomendas.internal.cliente.entity;
 
+import br.com.gerenciador.gerenciadorencomendas.internal.encomenda.entity.Encomenda;
 import jakarta.persistence.*;
 import lombok.Getter;
 import java.time.LocalDateTime;

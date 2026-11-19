@@ -1,5 +1,5 @@
 
-package br.com.gerenciador.gerenciadorencomendas.domain.entity;
+package br.com.gerenciador.gerenciadorencomendas.internal.encomenda.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
