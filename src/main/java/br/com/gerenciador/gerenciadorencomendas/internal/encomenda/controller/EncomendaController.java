@@ -35,7 +35,7 @@ public class EncomendaController {
     }
     // Listar todas as encomendas
     @GetMapping
-    public ResponseEntity<List<EncomendaResponseDTO>> listarTodas() {
+    public ResponseEntity<List<EncomendaResponseDto>> listarTodas() {
 
         return ResponseEntity.ok(
                 encomendaService.listarTodas()
