@@ -107,14 +107,32 @@ public class Encomenda {
     }
 
     public void registrarPagamento(Pagamento pagamento) {
+        if (pagamento == null) {
+            throw new IllegalArgumentException(
+                    "O pagamento é obrigatório."
+            );
+        }
+
+        if (status == StatusEncomenda.CANCELADA) {
+            throw new IllegalStateException(
+                    "Não é possível registrar pagamento em uma encomenda cancelada."
+            );
+        }
+
+        if (pagamento.getEncomenda() != null || pagamentos.contains(pagamento)) {
+            throw new IllegalStateException(
+                    "Este pagamento já foi vinculado a uma encomenda."
+            );
+        }
+
         if (pagamento.getValor().compareTo(getSaldoRestante()) > 0) {
             throw new IllegalArgumentException(
                     "O pagamento ultrapassa o saldo restante."
             );
         }
 
-        pagamentos.add(pagamento);
         pagamento.definirEncomenda(this);
+        pagamentos.add(pagamento);
     }
 
     public BigDecimal calcularTotalPago() {

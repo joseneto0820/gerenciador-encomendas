@@ -1,8 +1,6 @@
-
 package br.com.gerenciador.gerenciadorencomendas.internal.pagamento.entity;
 
 import br.com.gerenciador.gerenciadorencomendas.domain.enums.FormaPagamento;
-
 import br.com.gerenciador.gerenciadorencomendas.internal.encomenda.entity.Encomenda;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -25,6 +23,7 @@ public class Pagamento {
     private LocalDateTime dataPagamento;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private FormaPagamento formaPagamento;
 
     private String observacao;
@@ -46,13 +45,31 @@ public class Pagamento {
             );
         }
 
+        if (formaPagamento == null) {
+            throw new IllegalArgumentException(
+                    "A forma de pagamento é obrigatória."
+            );
+        }
+
         this.valor = valor;
         this.formaPagamento = formaPagamento;
         this.observacao = observacao;
         this.dataPagamento = LocalDateTime.now();
     }
 
-    void definirEncomenda(Encomenda encomenda) {
+    public void definirEncomenda(Encomenda encomenda) {
+        if (encomenda == null) {
+            throw new IllegalArgumentException(
+                    "A encomenda é obrigatória."
+            );
+        }
+
+        if (this.encomenda != null && this.encomenda != encomenda) {
+            throw new IllegalStateException(
+                    "O pagamento já pertence a outra encomenda."
+            );
+        }
+
         this.encomenda = encomenda;
     }
 }
